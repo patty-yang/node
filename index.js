@@ -1,4 +1,6 @@
-require('./models/sync')
+require('./models/relation')
+require('./mockjs/classes')
+require('./mockjs/student')
 
 // 路由层 route
 
