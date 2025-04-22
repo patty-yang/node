@@ -19,6 +19,10 @@ module.exports = sequelize.define(
     mobile: {
       type: DataTypes.STRING(11),
       allowNull: false
+    },
+    classId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
   {
