@@ -16,14 +16,17 @@ app.use(express.json())
 //   })
 // })
 
-app.post('/api/admin', async (req, res, next) => {
-  await AdminService.createAdmin(req.body)
+// app.post('/api/admin', async (req, res, next) => {
+//   await AdminService.createAdmin(req.body)
 
-  res.send({
-    code: 200,
-    msg: 'success'
-  })
-})
+//   res.send({
+//     code: 200,
+//     msg: 'success'
+//   })
+// })
+
+app.use('/api/admin', require('./api/admin'))
+
 app.use(require('./errorMiddleware'))
 
 app.listen(9527, () => {
