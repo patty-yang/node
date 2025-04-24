@@ -1,2 +1,2 @@
-// require('./relation')
+require('./relation')
 require('./sync')
