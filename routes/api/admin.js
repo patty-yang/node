@@ -6,22 +6,27 @@ const AdminService = require('../../services/admin')
 
 const sendMsg = require('../sendResult')
 
+const crypt = require('../../utils/crypt')
 router.post('/login', async (req, res) => {
   const result = await AdminService.login(req.body.loginId, req.body.loginPwd)
   if (result) {
     const value = result.id
-    res.cookie('token', result.id, {
+    const encryptedValue = crypt.encrypt(value.toString())
+
+    res.cookie('token', encryptedValue, {
       maxAge: 3600 * 1000,
       httpOnly: true
+      // signed: true
     })
-    res.header('Authorization', value)
+    res.header('Authorization', encryptedValue)
     res.send({
       code: 200,
       msg: 'success'
     })
+    return result
   }
-  return result
 })
+
 router.get('/', async (req, res, next) => {
   try {
     const { page = 1, pageSize = 10 } = req.query
@@ -32,6 +37,7 @@ router.get('/', async (req, res, next) => {
       msg: 'success',
       data: result
     })
+    next()
   } catch (error) {
     next(error)
   }

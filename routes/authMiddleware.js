@@ -1,5 +1,5 @@
-const { pathToRegexp } = require('path-to-regexp')
-// 用来解析 token
+const { match } = require('path-to-regexp')
+const crypt = require('../utils/crypt')
 const needTokenApi = [
   {
     path: '/api/admin',
@@ -12,21 +12,27 @@ const needTokenApi = [
 ]
 
 module.exports = (req, res, next) => {
-  const { method, path } = req
-  const isNeedToken = needTokenApi.filter((api) => {
-    const reg = pathToRegexp('/api/admin/:id')
-    return api.method === method && reg.test(path)
+  const needTokenApis = needTokenApi.filter((api) => {
+    const reg = match(api.path)
+    return api.method === req.method && reg(req.path)
   })
-  if (isNeedToken.length === 0) {
+  if (needTokenApis.length === 0) {
     next()
     return
   }
   const token = req.headers['authorization'] || req.cookies.token
+
   if (!token) {
     return res.status(401).send({
       code: 401,
       msg: 'Unauthorized'
     })
   }
+
+  const userId = crypt.decrypt(token)
+  req.userId = userId
+
+  console.log('auth success')
+
   next()
 }
