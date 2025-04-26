@@ -6,10 +6,27 @@ const AdminService = require('../../services/admin')
 
 const sendMsg = require('../sendResult')
 
+router.post('/login', async (req, res) => {
+  const result = await AdminService.login(req.body.loginId, req.body.loginPwd)
+  if (result) {
+    const value = result.id
+    res.cookie('token', result.id, {
+      maxAge: 3600 * 1000,
+      httpOnly: true
+    })
+    res.header('Authorization', value)
+    res.send({
+      code: 200,
+      msg: 'success'
+    })
+  }
+  return result
+})
 router.get('/', async (req, res, next) => {
   try {
     const { page = 1, pageSize = 10 } = req.query
     const result = await AdminService.getAdminList({ page, pageSize })
+    res.setHeader('cookie', 'test=123')
     res.send({
       code: 200,
       msg: 'success',
