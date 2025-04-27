@@ -7,7 +7,7 @@ function getCommonAppended(pathSeg) {
     filename: path.resolve(__dirname, 'logs', pathSeg, 'logging.log'),
     maxLogSize: 1024 * 1024, //配置文件的最大字节数
     keepFileExt: true,
-    daysToKeep: 3,
+    numBackups: 3,
     layout: {
       type: 'pattern',
       pattern: '%c [%d{yyyy-MM-dd hh:mm:ss}] [%p]: %m%n'
