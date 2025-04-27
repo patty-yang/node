@@ -5,6 +5,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 // app.use(cookieParser('encrypt'))
 app.use(cookieParser())
+app.use(require('./apiLoggerMiddleware'))
+
 app.use(require('./authMiddleware'))
 app.use('/api/admin', require('./api/admin'))
 

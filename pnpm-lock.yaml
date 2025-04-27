@@ -15,7 +15,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       log4js:
-        specifier: ^6.9.1
+        specifier: ^6.2.0
         version: 6.9.1
       md5:
         specifier: ^2.3.0
