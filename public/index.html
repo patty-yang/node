@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a resrole="thunder" href=""></a>
+    <!--
+      迅雷下载协议
+      AA地址ZZ
+      base64编码
+      thunder://base64编码
+    -->
+    <script>
+      const thunderLinkElement = document.querySelector('a[resrole="thunder"]')
+
+      if (thunderLinkElement) {
+        const originalHref = thunderLinkElement.href
+        const thunderLink = `AA${originalHref}ZZ`
+        thunderLinkElement.href = `thunder://${btoa(thunderLink)}`
+      }
+    </script>
+  </body>
+</html>

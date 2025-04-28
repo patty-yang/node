@@ -10,6 +10,7 @@ app.use(require('./apiLoggerMiddleware'))
 app.use(require('./authMiddleware'))
 app.use('/api/admin', require('./api/admin'))
 app.use('/api/upload', require('./api/upload'))
+app.use('/api/download', require('./api/download'))
 
 app.use(require('./errorMiddleware'))
 
