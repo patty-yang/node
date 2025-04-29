@@ -12,6 +12,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
+    "jimp": "^1.6.0",
     "log4js": "^6.2.0",
     "md5": "^2.3.0",
     "mockjs": "^1.1.0",
