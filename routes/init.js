@@ -1,15 +1,18 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const app = express()
 const { apiProxy } = require('./proxyMiddleware')
+
+const app = express()
+
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 // app.use(cookieParser('encrypt'))
-app.use(cookieParser())
 app.use(require('./apiLoggerMiddleware'))
 
 app.use(require('./authMiddleware'))
 
+app.use('/getCaptcha', require('./api/captcha'))
 app.use('/api/admin', require('./api/admin'))
 app.use('/api/upload', require('./api/upload'))
 app.use('/api/download', require('./api/download'))
