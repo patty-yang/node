@@ -1,6 +1,7 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const app = express()
+const { apiProxy } = require('./proxyMiddleware')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 // app.use(cookieParser('encrypt'))
@@ -12,7 +13,7 @@ app.use(require('./authMiddleware'))
 app.use('/api/admin', require('./api/admin'))
 app.use('/api/upload', require('./api/upload'))
 app.use('/api/download', require('./api/download'))
-
+app.use(apiProxy)
 app.use(require('./errorMiddleware'))
 
 app.listen(9527, () => {
