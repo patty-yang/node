@@ -21,7 +21,8 @@ log4js.configure({
     default: {
       type: 'stdout'
     },
-    api: getCommonAppended('api')
+    api: getCommonAppended('api'),
+    errors: getCommonAppended('errors')
   },
   categories: {
     sql: {
@@ -35,6 +36,10 @@ log4js.configure({
     api: {
       appenders: ['api'],
       level: 'all'
+    },
+    errors: {
+      appenders: ['errors'],
+      level: 'all'
     }
   }
 })
@@ -46,3 +51,4 @@ process.on('exit', () => {
 exports.sqlLogger = log4js.getLogger('sql')
 exports.logger = log4js.getLogger()
 exports.apiLogger = log4js.getLogger('api')
+exports.errorsLogger = log4js.getLogger('errors')
